@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-19T20:37:31.442593Z",
+  "updated_at": "2026-07-19T20:48:16.982653Z",
   "markets": {
     "sa": {
       "label": "السوق السعودي",
@@ -62,6 +62,30 @@
               "target1": 19.23,
               "target2": 19.82,
               "target3": 18.89
+            }
+          ]
+        },
+        {
+          "name": "مواد البناء",
+          "score": 79.2,
+          "stocks": [
+            {
+              "code": "1302",
+              "name": "بوان",
+              "price": 37.98,
+              "change_pct": -1.35,
+              "rsi14": 35.7,
+              "volume_ratio": 0.37,
+              "accumulation_score": 79.2,
+              "classification": "تجميع نشط",
+              "support": 37.88,
+              "resistance": 42.12,
+              "week52_low": 37.88,
+              "week52_high": 61.6,
+              "stop_loss": 37.41,
+              "target1": 39.4,
+              "target2": 40.83,
+              "target3": 42.12
             }
           ]
         },
@@ -289,7 +313,7 @@
         },
         {
           "name": "البنوك",
-          "score": 69.3,
+          "score": 69.8,
           "stocks": [
             {
               "code": "1080",
@@ -418,22 +442,22 @@
               "target3": 67.0
             },
             {
-              "code": "1060",
+              "code": "1020",
               "name": "بنك الجزيرة",
-              "price": 32.16,
-              "change_pct": -0.06,
-              "rsi14": 38.5,
-              "volume_ratio": 0.24,
-              "accumulation_score": 51.5,
+              "price": 11.71,
+              "change_pct": -0.76,
+              "rsi14": 45.4,
+              "volume_ratio": 0.68,
+              "accumulation_score": 55.6,
               "classification": "محايد",
-              "support": 31.74,
-              "resistance": 34.08,
-              "week52_low": 29.19,
-              "week52_high": 36.86,
-              "stop_loss": 31.55,
-              "target1": 32.74,
-              "target2": 33.32,
-              "target3": 34.08
+              "support": 11.6,
+              "resistance": 12.11,
+              "week52_low": 10.39,
+              "week52_high": 12.68,
+              "stop_loss": 11.53,
+              "target1": 11.93,
+              "target2": 12.15,
+              "target3": 12.11
             },
             {
               "code": "1180",
@@ -452,6 +476,54 @@
               "target1": 38.88,
               "target2": 39.61,
               "target3": 41.18
+            }
+          ]
+        },
+        {
+          "name": "الخدمات المالية",
+          "score": 69.5,
+          "stocks": [
+            {
+              "code": "4084",
+              "name": "دراية المالية",
+              "price": 22.18,
+              "change_pct": -1.11,
+              "rsi14": 52.7,
+              "volume_ratio": 0.27,
+              "accumulation_score": 69.5,
+              "classification": "تجميع نشط",
+              "support": 21.78,
+              "resistance": 22.55,
+              "week52_low": 20.55,
+              "week52_high": 30.56,
+              "stop_loss": 21.61,
+              "target1": 22.69,
+              "target2": 23.21,
+              "target3": 22.55
+            }
+          ]
+        },
+        {
+          "name": "الفنادق والسياحة",
+          "score": 69.1,
+          "stocks": [
+            {
+              "code": "1810",
+              "name": "سيرا",
+              "price": 21.75,
+              "change_pct": 0.05,
+              "rsi14": 74.5,
+              "volume_ratio": 0.81,
+              "accumulation_score": 69.1,
+              "classification": "تشبع شرائي",
+              "support": 20.83,
+              "resistance": 21.75,
+              "week52_low": 20.83,
+              "week52_high": 34.5,
+              "stop_loss": 20.67,
+              "target1": 22.23,
+              "target2": 22.72,
+              "target3": 21.75
             }
           ]
         },
@@ -494,6 +566,30 @@
               "target1": 66.49,
               "target2": 70.03,
               "target3": 77.0
+            }
+          ]
+        },
+        {
+          "name": "الزراعة",
+          "score": 68.2,
+          "stocks": [
+            {
+              "code": "4061",
+              "name": "أنعام القابضة",
+              "price": 11.56,
+              "change_pct": -3.18,
+              "rsi14": 40.8,
+              "volume_ratio": 0.22,
+              "accumulation_score": 68.2,
+              "classification": "تجميع نشط",
+              "support": 11.5,
+              "resistance": 12.77,
+              "week52_low": 9.44,
+              "week52_high": 16.4,
+              "stop_loss": 11.27,
+              "target1": 12.24,
+              "target2": 12.92,
+              "target3": 12.77
             }
           ]
         },
@@ -824,6 +920,30 @@
               "target1": 58.97,
               "target2": 60.63,
               "target3": 63.1
+            }
+          ]
+        },
+        {
+          "name": "البرمجيات والتقنية",
+          "score": 47.6,
+          "stocks": [
+            {
+              "code": "7203",
+              "name": "علم",
+              "price": 639.5,
+              "change_pct": -0.54,
+              "rsi14": 18.5,
+              "volume_ratio": 0.43,
+              "accumulation_score": 47.6,
+              "classification": "تشبع بيعي",
+              "support": 639.5,
+              "resistance": 701.0,
+              "week52_low": 509.5,
+              "week52_high": 942.79,
+              "stop_loss": 633.45,
+              "target1": 657.66,
+              "target2": 675.82,
+              "target3": 701.0
             }
           ]
         },
