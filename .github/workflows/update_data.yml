@@ -1,0 +1,35 @@
+name: تحديث بيانات قطاع البنوك السعودية
+
+on:
+  schedule:
+    - cron: '0,30 7-12 * * 0-4'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: سحب المستودع
+        uses: actions/checkout@v4
+
+      - name: تجهيز بايثون
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: تثبيت المكتبات
+        run: pip install -r requirements.txt
+
+      - name: جلب وتحليل البيانات
+        run: python scripts/fetch_data.py
+
+      - name: حفظ التحديث ورفعه
+        run: |
+          git config user.name "tasi-terminal-bot"
+          git config user.email "actions@github.com"
+          git add data/banks_sa.json
+          git diff --staged --quiet || git commit -m "تحديث تلقائي للبيانات $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push
