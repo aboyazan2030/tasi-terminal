@@ -37,6 +37,15 @@
   .sector-chip.active{border-color:var(--gold); color:var(--gold);}
   .sector-chip .s{font-family:'JetBrains Mono', monospace; margin-right:4px; color:inherit; opacity:.8;}
 
+  .top-picks{max-width:1200px; margin:0 auto 26px; background:linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%); border:1px solid var(--gold-soft); border-radius:14px; padding:18px 20px;}
+  .top-picks h2{font-family:'Space Grotesk', sans-serif; font-size:16px; color:var(--gold); margin-bottom:14px;}
+  .top-row{display:flex; justify-content:space-between; align-items:center; padding:9px 0; border-bottom:1px solid var(--border); font-size:13px;}
+  .top-row:last-child{border-bottom:none;}
+  .top-rank{color:var(--gold); font-family:'JetBrains Mono', monospace; width:22px; flex-shrink:0;}
+  .top-name{flex:1; padding:0 8px;}
+  .top-sector{color:var(--muted); font-size:11px;}
+  .top-score{font-family:'JetBrains Mono', monospace; color:var(--gold); font-weight:600;}
+
   .sector-block{max-width:1200px; margin:0 auto 34px;}
   .sector-title{display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;}
   .sector-title h2{font-family:'Space Grotesk', sans-serif; font-size:18px;}
@@ -81,6 +90,7 @@
 </header>
 
 <div class="market-tabs" id="marketTabs"></div>
+<div class="top-picks" id="topPicks"></div>
 <div class="sector-nav" id="sectorNav"></div>
 <div id="content"></div>
 
@@ -114,6 +124,7 @@ async function load() {
     currentSector = DATA.markets[currentMarket].sectors[0].name;
     renderSectorNav();
     renderContent();
+    renderTopPicks();
   } catch (e) {
     document.getElementById('updatedText').textContent = 'تعذّر تحميل البيانات';
   }
@@ -130,7 +141,7 @@ function renderMarketTabs() {
     el.addEventListener('click', () => {
       currentMarket = el.dataset.market;
       currentSector = DATA.markets[currentMarket].sectors[0].name;
-      renderMarketTabs(); renderSectorNav(); renderContent();
+      renderMarketTabs(); renderSectorNav(); renderContent(); renderTopPicks();
     });
   });
 }
@@ -149,6 +160,31 @@ function renderSectorNav() {
       renderSectorNav(); renderContent();
     });
   });
+}
+
+function renderTopPicks() {
+  const market = DATA.markets[currentMarket];
+  const all = [];
+  market.sectors.forEach(sector => {
+    sector.stocks.forEach(s => all.push({ ...s, sectorName: sector.name }));
+  });
+  all.sort((a, b) => b.accumulation_score - a.accumulation_score);
+  const top5 = all.slice(0, 5);
+
+  const wrap = document.getElementById('topPicks');
+  wrap.innerHTML = `
+    <h2>⭐ أفضل 5 فرص تجميع — ${market.label}</h2>
+    ${top5.map((s, i) => `
+      <div class="top-row">
+        <span class="top-rank">${i + 1}</span>
+        <div class="top-name">
+          ${s.name}
+          <div class="top-sector">${s.sectorName} · ${s.code}</div>
+        </div>
+        <span class="top-score">${s.accumulation_score}</span>
+      </div>
+    `).join('')}
+  `;
 }
 
 function renderContent() {
