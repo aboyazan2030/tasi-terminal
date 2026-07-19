@@ -22,6 +22,13 @@
   .updated{color:var(--muted); font-size:12px;}
   .updated.live::before{content:''; display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--up); margin-left:6px; box-shadow:0 0 8px var(--up);}
 
+  .price-status{
+    display:inline-block; margin-right:8px; padding:2px 10px; border-radius:999px;
+    font-size:11px; font-family:'JetBrains Mono', monospace;
+  }
+  .price-status.live{background:rgba(47,191,131,.15); color:var(--up);}
+  .price-status.closed{background:rgba(203,161,53,.15); color:var(--gold);}
+
   .market-tabs{max-width:1200px; margin:0 auto 16px; display:flex; gap:8px;}
   .market-tab{
     flex:1; text-align:center; padding:12px; border-radius:10px; border:1px solid var(--border);
@@ -87,6 +94,7 @@
   <span class="eyebrow">Tasi Terminal · مرحلة 2 — كل القطاعات</span>
   <h1>لوحة السوق السعودي والأمريكي</h1>
   <span class="updated mono" id="updatedText">جارِ التحميل...</span>
+  <span id="priceStatus"></span>
 </header>
 
 <div class="market-tabs" id="marketTabs"></div>
@@ -121,13 +129,18 @@ async function load() {
     t.classList.add('live');
 
     renderMarketTabs();
-    currentSector = DATA.markets[currentMarket].sectors[0].name;
+    currentSector = getFirstSectorName(currentMarket);
     renderSectorNav();
     renderContent();
     renderTopPicks();
   } catch (e) {
     document.getElementById('updatedText').textContent = 'تعذّر تحميل البيانات';
   }
+}
+
+function getFirstSectorName(marketKey) {
+  const sectors = DATA.markets[marketKey] && DATA.markets[marketKey].sectors;
+  return (sectors && sectors.length > 0) ? sectors[0].name : null;
 }
 
 function renderMarketTabs() {
@@ -140,10 +153,15 @@ function renderMarketTabs() {
   wrap.querySelectorAll('.market-tab').forEach(el => {
     el.addEventListener('click', () => {
       currentMarket = el.dataset.market;
-      currentSector = DATA.markets[currentMarket].sectors[0].name;
+      currentSector = getFirstSectorName(currentMarket);
       renderMarketTabs(); renderSectorNav(); renderContent(); renderTopPicks();
     });
   });
+
+  const status = DATA.markets[currentMarket].price_status || '';
+  const isLive = status.includes('لحظي');
+  document.getElementById('priceStatus').innerHTML =
+    `<span class="price-status ${isLive ? 'live' : 'closed'}">${status}</span>`;
 }
 
 function renderSectorNav() {
@@ -189,8 +207,14 @@ function renderTopPicks() {
 
 function renderContent() {
   const market = DATA.markets[currentMarket];
-  const sector = market.sectors.find(s => s.name === currentSector);
   const content = document.getElementById('content');
+
+  if (!market.sectors || market.sectors.length === 0) {
+    content.innerHTML = `<div class="empty"><h2>لا توجد بيانات لهذا السوق حاليًا</h2><p>احتمال تعذّر جلب بيانات هذا السوق بآخر تشغيلة — جرب لاحقًا بعد التحديث القادم.</p></div>`;
+    return;
+  }
+
+  const sector = market.sectors.find(s => s.name === currentSector);
   if (!sector) { content.innerHTML = ''; return; }
 
   content.innerHTML = `
