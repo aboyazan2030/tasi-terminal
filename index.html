@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>تاسي تيرمينال — قطاع البنوك</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A1412;
+    --surface:#10201C;
+    --surface-2:#152621;
+    --border:#1E332D;
+    --text:#EDF2F0;
+    --muted:#7C948C;
+    --gold:#CBA135;
+    --gold-soft:#8A742A;
+    --up:#2FBF83;
+    --down:#E5484D;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'IBM Plex Sans Arabic', sans-serif;
+    min-height:100vh;
+    padding:24px 16px 60px;
+  }
+  .mono{font-family:'JetBrains Mono', monospace;}
+  header{
+    max-width:1100px; margin:0 auto 28px;
+    display:flex; flex-direction:column; gap:6px;
+  }
+  .eyebrow{
+    color:var(--gold); font-size:12px; letter-spacing:2px;
+    font-family:'JetBrains Mono', monospace; text-transform:uppercase;
+  }
+  h1{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:28px; font-weight:700;
+  }
+  .updated{color:var(--muted); font-size:13px;}
+  .updated.live::before{
+    content:''; display:inline-block; width:7px; height:7px; border-radius:50%;
+    background:var(--up); margin-left:6px; box-shadow:0 0 8px var(--up);
+  }
+
+  .sector-band{
+    max-width:1100px; margin:0 auto 32px;
+    background:linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
+    border:1px solid var(--border); border-radius:14px;
+    padding:22px 24px;
+    display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap;
+  }
+  .sector-band .label{color:var(--muted); font-size:13px; margin-bottom:4px;}
+  .sector-band .score{
+    font-family:'Space Grotesk', sans-serif; font-size:38px; font-weight:700;
+  }
+  .gauge-track{
+    width:220px; height:8px; border-radius:4px; background:var(--border); overflow:hidden;
+  }
+  .gauge-fill{
+    height:100%; border-radius:4px;
+    background:linear-gradient(90deg, var(--down), var(--gold), var(--up));
+  }
+
+  .grid{
+    max-width:1100px; margin:0 auto;
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr));
+    gap:16px;
+  }
+  .card{
+    background:var(--surface); border:1px solid var(--border); border-radius:12px;
+    padding:18px; display:flex; flex-direction:column; gap:12px;
+    transition:border-color .2s;
+  }
+  .card:hover{border-color:var(--gold-soft);}
+  .card-top{display:flex; justify-content:space-between; align-items:flex-start;}
+  .stock-name{font-weight:600; font-size:15px;}
+  .stock-code{color:var(--muted); font-size:12px;}
+  .price{font-family:'JetBrains Mono', monospace; font-size:22px; font-weight:600; text-align:left;}
+  .change{font-family:'JetBrains Mono', monospace; font-size:13px; text-align:left;}
+  .change.up{color:var(--up);}
+  .change.down{color:var(--down);}
+
+  .badge{
+    display:inline-block; font-size:11px; padding:3px 10px; border-radius:999px;
+    font-weight:600; width:fit-content;
+  }
+  .badge.تجميع-نشط{background:rgba(203,161,53,.15); color:var(--gold);}
+  .badge.تصريف{background:rgba(229,72,77,.15); color:var(--down);}
+  .badge.تشبع-شرائي{background:rgba(229,72,77,.12); color:var(--down);}
+  .badge.تشبع-بيعي{background:rgba(47,191,131,.15); color:var(--up);}
+  .badge.محايد{background:rgba(124,148,140,.15); color:var(--muted);}
+
+  .metric-row{display:flex; justify-content:space-between; font-size:12px; color:var(--muted);}
+  .metric-row .val{color:var(--text); font-family:'JetBrains Mono', monospace;}
+
+  .accum-label{display:flex; justify-content:space-between; font-size:11px; color:var(--muted); margin-bottom:4px;}
+  .accum-track{width:100%; height:6px; background:var(--border); border-radius:3px; overflow:hidden;}
+  .accum-fill{height:100%; background:linear-gradient(90deg, var(--gold-soft), var(--gold));}
+
+  .levels{
+    display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px;
+    font-size:11px; color:var(--muted); border-top:1px solid var(--border); padding-top:10px;
+  }
+  .levels .v{color:var(--text); font-family:'JetBrains Mono', monospace; font-size:12px; display:block;}
+
+  .empty{
+    max-width:1100px; margin:60px auto; text-align:center; color:var(--muted);
+    border:1px dashed var(--border); border-radius:14px; padding:50px 20px;
+  }
+  .empty h2{font-family:'Space Grotesk', sans-serif; color:var(--text); margin-bottom:8px; font-size:18px;}
+  footer{max-width:1100px; margin:40px auto 0; color:var(--muted); font-size:12px; text-align:center;}
+</style>
+</head>
+<body>
+
+<header>
+  <span class="eyebrow">Tasi Terminal · مرحلة 1 — تجريبية</span>
+  <h1>قطاع البنوك السعودية</h1>
+  <span class="updated mono" id="updatedText">جارِ التحميل...</span>
+</header>
+
+<div class="sector-band" id="sectorBand" style="display:none;">
+  <div>
+    <div class="label">درجة تجميع القطاع</div>
+    <div class="score mono" id="sectorScore">—</div>
+  </div>
+  <div>
+    <div class="gauge-track"><div class="gauge-fill" id="sectorGauge" style="width:0%"></div></div>
+  </div>
+</div>
+
+<div class="grid" id="grid"></div>
+<div class="empty" id="emptyState" style="display:none;">
+  <h2>بانتظار أول تحديث للبيانات</h2>
+  <p>شغّل الـ Workflow يدويًا من تبويب Actions في GitHub (زر "Run workflow")، أو انتظر أول تشغيل مجدول تلقائيًا.</p>
+</div>
+
+<footer>البيانات تُحدَّث تلقائيًا عبر GitHub Actions من مصدر بيانات علني — للأغراض التحليلية فقط وليست توصية استثمارية.</footer>
+
+<script>
+async function load() {
+  try {
+    const res = await fetch('data/banks_sa.json', { cache: 'no-store' });
+    const data = await res.json();
+    render(data);
+  } catch (e) {
+    document.getElementById('updatedText').textContent = 'تعذّر تحميل البيانات';
+  }
+}
+
+function render(data) {
+  const grid = document.getElementById('grid');
+  const empty = document.getElementById('emptyState');
+  const updatedText = document.getElementById('updatedText');
+
+  if (!data.stocks || data.stocks.length === 0) {
+    empty.style.display = 'block';
+    updatedText.textContent = 'لا توجد بيانات بعد';
+    return;
+  }
+
+  document.getElementById('sectorBand').style.display = 'flex';
+  document.getElementById('sectorScore').textContent = data.sector_score;
+  document.getElementById('sectorGauge').style.width = data.sector_score + '%';
+
+  const d = new Date(data.updated_at);
+  updatedText.textContent = 'آخر تحديث: ' + d.toLocaleString('ar-SA', { dateStyle: 'medium', timeStyle: 'short' });
+  updatedText.classList.add('live');
+
+  grid.innerHTML = data.stocks.map(s => {
+    const changeClass = s.change_pct >= 0 ? 'up' : 'down';
+    const changeSign = s.change_pct >= 0 ? '+' : '';
+    const badgeClass = s.classification.replace(/ /g, '-');
+    return `
+      <div class="card">
+        <div class="card-top">
+          <div>
+            <div class="stock-name">${s.name}</div>
+            <div class="stock-code mono">${s.code}</div>
+          </div>
+          <div>
+            <div class="price">${s.price}</div>
+            <div class="change ${changeClass}">${changeSign}${s.change_pct}%</div>
+          </div>
+        </div>
+
+        <span class="badge ${badgeClass}">${s.classification}</span>
+
+        <div>
+          <div class="accum-label"><span>درجة التجميع</span><span class="mono">${s.accumulation_score}</span></div>
+          <div class="accum-track"><div class="accum-fill" style="width:${s.accumulation_score}%"></div></div>
+        </div>
+
+        <div class="metric-row"><span>RSI14</span><span class="val">${s.rsi14}</span></div>
+        <div class="metric-row"><span>نسبة الحجم</span><span class="val">×${s.volume_ratio}</span></div>
+
+        <div class="levels">
+          <div>وقف الخسارة<span class="v">${s.stop_loss}</span></div>
+          <div>هدف 1<span class="v">${s.target1}</span></div>
+          <div>هدف 2<span class="v">${s.target2}</span></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+load();
+</script>
+</body>
+</html>
