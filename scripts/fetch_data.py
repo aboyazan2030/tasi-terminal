@@ -6,6 +6,7 @@ fetch_data.py — Tasi Terminal (مشروع مستقل بالكامل)
 """
 
 import json
+import os
 import datetime
 import numpy as np
 import pandas as pd
@@ -196,6 +197,7 @@ def main():
             "sectors": sectors_out,
         }
 
+    os.makedirs("data", exist_ok=True)
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
 
