@@ -7,6 +7,7 @@ fetch_data.py — Tasi Terminal (مشروع مستقل بالكامل)
 
 import json
 import os
+import math
 import datetime
 import numpy as np
 import pandas as pd
@@ -167,6 +168,8 @@ def analyze_ticker(symbol, name):
 
     price = float(closes.iloc[-1])
     prev_price = float(closes.iloc[-2])
+    if math.isnan(price) or math.isnan(prev_price) or prev_price == 0:
+        return None
     change_pct = ((price - prev_price) / prev_price) * 100
 
     rsi14 = compute_rsi(closes)
@@ -193,7 +196,7 @@ def analyze_ticker(symbol, name):
     target2 = round(price + atr * 3, 2)
     target3 = round(resistance, 2)
 
-    return {
+    row = {
         "code": symbol.replace(".SR", ""),
         "name": name,
         "price": round(price, 2),
@@ -211,6 +214,12 @@ def analyze_ticker(symbol, name):
         "target2": target2,
         "target3": target3,
     }
+
+    for key, value in row.items():
+        if isinstance(value, float) and math.isnan(value):
+            return None
+
+    return row
 
 
 def main():
