@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-19T19:59:46.448390Z",
+  "updated_at": "2026-07-19T20:24:09.762287Z",
   "markets": {
     "sa": {
       "label": "السوق السعودي",
@@ -67,7 +67,7 @@
         },
         {
           "name": "البتروكيماويات",
-          "score": 74.8,
+          "score": 73.1,
           "stocks": [
             {
               "code": "2350",
@@ -140,66 +140,24 @@
               "target1": 32.4,
               "target2": 33.3,
               "target3": 31.5
-            }
-          ]
-        },
-        {
-          "name": "الأسمنت",
-          "score": 71.1,
-          "stocks": [
-            {
-              "code": "3040",
-              "name": "أسمنت القصيم",
-              "price": 45.16,
-              "change_pct": -0.92,
-              "rsi14": 54.6,
-              "volume_ratio": 0.5,
-              "accumulation_score": 81.1,
-              "classification": "تجميع نشط",
-              "support": 44.4,
-              "resistance": 45.58,
-              "week52_low": 38.14,
-              "week52_high": 45.58,
-              "stop_loss": 44.18,
-              "target1": 45.82,
-              "target2": 46.49,
-              "target3": 45.58
             },
             {
-              "code": "3050",
-              "name": "أسمنت الجنوب",
-              "price": 19.07,
-              "change_pct": -0.94,
-              "rsi14": 40.8,
-              "volume_ratio": 0.42,
-              "accumulation_score": 67.1,
+              "code": "2020",
+              "name": "سافكو",
+              "price": 123.0,
+              "change_pct": -0.81,
+              "rsi14": 51.4,
+              "volume_ratio": 0.28,
+              "accumulation_score": 66.1,
               "classification": "تجميع نشط",
-              "support": 19.05,
-              "resistance": 19.75,
-              "week52_low": 19.05,
-              "week52_high": 26.92,
-              "stop_loss": 18.94,
-              "target1": 19.39,
-              "target2": 19.72,
-              "target3": 19.75
-            },
-            {
-              "code": "3030",
-              "name": "أسمنت السعودية",
-              "price": 29.9,
-              "change_pct": -0.33,
-              "rsi14": 29.6,
-              "volume_ratio": 1.31,
-              "accumulation_score": 65.2,
-              "classification": "تجميع نشط",
-              "support": 29.9,
-              "resistance": 31.1,
-              "week52_low": 29.9,
-              "week52_high": 38.83,
-              "stop_loss": 29.76,
-              "target1": 30.32,
-              "target2": 30.74,
-              "target3": 31.1
+              "support": 122.3,
+              "resistance": 127.0,
+              "week52_low": 106.47,
+              "week52_high": 159.0,
+              "stop_loss": 121.33,
+              "target1": 125.93,
+              "target2": 128.85,
+              "target3": 127.0
             }
           ]
         },
@@ -265,7 +223,7 @@
         },
         {
           "name": "البنوك",
-          "score": 68.5,
+          "score": 69.3,
           "stocks": [
             {
               "code": "1080",
@@ -320,6 +278,24 @@
               "target1": 24.46,
               "target2": 24.87,
               "target3": 25.2
+            },
+            {
+              "code": "1140",
+              "name": "بنك البلاد",
+              "price": 24.01,
+              "change_pct": -0.95,
+              "rsi14": 45.2,
+              "volume_ratio": 0.41,
+              "accumulation_score": 75.8,
+              "classification": "تجميع نشط",
+              "support": 23.94,
+              "resistance": 25.08,
+              "week52_low": 23.74,
+              "week52_high": 29.34,
+              "stop_loss": 23.8,
+              "target1": 24.43,
+              "target2": 24.86,
+              "target3": 25.08
             },
             {
               "code": "1010",
@@ -498,6 +474,84 @@
           ]
         },
         {
+          "name": "الأسمنت",
+          "score": 64.6,
+          "stocks": [
+            {
+              "code": "3040",
+              "name": "أسمنت القصيم",
+              "price": 45.16,
+              "change_pct": -0.92,
+              "rsi14": 54.6,
+              "volume_ratio": 0.5,
+              "accumulation_score": 81.1,
+              "classification": "تجميع نشط",
+              "support": 44.4,
+              "resistance": 45.58,
+              "week52_low": 38.14,
+              "week52_high": 45.58,
+              "stop_loss": 44.18,
+              "target1": 45.82,
+              "target2": 46.49,
+              "target3": 45.58
+            },
+            {
+              "code": "3050",
+              "name": "أسمنت الجنوب",
+              "price": 19.07,
+              "change_pct": -0.94,
+              "rsi14": 40.8,
+              "volume_ratio": 0.42,
+              "accumulation_score": 67.1,
+              "classification": "تجميع نشط",
+              "support": 19.05,
+              "resistance": 19.75,
+              "week52_low": 19.05,
+              "week52_high": 26.92,
+              "stop_loss": 18.94,
+              "target1": 19.39,
+              "target2": 19.72,
+              "target3": 19.75
+            },
+            {
+              "code": "3030",
+              "name": "أسمنت السعودية",
+              "price": 29.9,
+              "change_pct": -0.33,
+              "rsi14": 29.6,
+              "volume_ratio": 1.31,
+              "accumulation_score": 65.2,
+              "classification": "تجميع نشط",
+              "support": 29.9,
+              "resistance": 31.1,
+              "week52_low": 29.9,
+              "week52_high": 38.83,
+              "stop_loss": 29.76,
+              "target1": 30.32,
+              "target2": 30.74,
+              "target3": 31.1
+            },
+            {
+              "code": "3060",
+              "name": "أسمنت ينبع",
+              "price": 15.08,
+              "change_pct": -0.53,
+              "rsi14": 31.9,
+              "volume_ratio": 0.54,
+              "accumulation_score": 45.0,
+              "classification": "محايد",
+              "support": 15.08,
+              "resistance": 15.69,
+              "week52_low": 13.28,
+              "week52_high": 16.57,
+              "stop_loss": 14.99,
+              "target1": 15.35,
+              "target2": 15.62,
+              "target3": 15.69
+            }
+          ]
+        },
+        {
           "name": "الرعاية الصحية",
           "score": 61.9,
           "stocks": [
@@ -618,6 +672,30 @@
           ]
         },
         {
+          "name": "التعدين",
+          "score": 48.3,
+          "stocks": [
+            {
+              "code": "1211",
+              "name": "معادن",
+              "price": 57.3,
+              "change_pct": 2.05,
+              "rsi14": 40.1,
+              "volume_ratio": 0.71,
+              "accumulation_score": 48.3,
+              "classification": "محايد",
+              "support": 56.15,
+              "resistance": 63.1,
+              "week52_low": 51.1,
+              "week52_high": 79.5,
+              "stop_loss": 55.59,
+              "target1": 58.97,
+              "target2": 60.63,
+              "target3": 63.1
+            }
+          ]
+        },
+        {
           "name": "الاتصالات",
           "score": 46.6,
           "stocks": [
@@ -679,7 +757,7 @@
         },
         {
           "name": "المرافق",
-          "score": 44.7,
+          "score": 43.2,
           "stocks": [
             {
               "code": "5110",
@@ -698,6 +776,24 @@
               "target1": 17.6,
               "target2": 18.0,
               "target3": 18.37
+            },
+            {
+              "code": "2082",
+              "name": "أكوا باور",
+              "price": 182.2,
+              "change_pct": -0.82,
+              "rsi14": 40.7,
+              "volume_ratio": 0.83,
+              "accumulation_score": 41.7,
+              "classification": "محايد",
+              "support": 182.2,
+              "resistance": 201.0,
+              "week52_low": 156.6,
+              "week52_high": 248.7,
+              "stop_loss": 180.16,
+              "target1": 188.33,
+              "target2": 194.46,
+              "target3": 201.0
             }
           ]
         }
