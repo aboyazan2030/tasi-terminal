@@ -158,9 +158,11 @@ def classify(accumulation_score, rsi):
 def analyze_ticker(symbol, name):
     try:
         hist = yf.Ticker(symbol).history(period="1y", interval="1d")
-    except Exception:
+    except Exception as e:
+        print(f"[خطأ] {symbol} ({name}): استثناء أثناء الجلب -> {e}")
         return None
     if hist is None or len(hist) < 30:
+        print(f"[خطأ] {symbol} ({name}): بيانات ناقصة، عدد الصفوف = {0 if hist is None else len(hist)}")
         return None
 
     closes = hist["Close"]
