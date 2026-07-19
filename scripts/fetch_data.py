@@ -143,6 +143,23 @@ def compute_obv_slope(closes, volumes, lookback=10):
     return float(np.clip(norm * 100, -100, 100))
 
 
+def market_price_status(market_key):
+    now = datetime.datetime.utcnow()
+    weekday = now.weekday()  # الاثنين=0 ... الأحد=6
+    hour = now.hour + now.minute / 60
+
+    if market_key == "sa":
+        # الأحد-الخميس (weekday 6,0,1,2,3)، 7:00-12:10 UTC تقريبًا
+        is_open = weekday in (6, 0, 1, 2, 3) and 7.0 <= hour <= 12.17
+    elif market_key == "us":
+        # الاثنين-الجمعة (weekday 0-4)، 13:30-20:00 UTC تقريبًا
+        is_open = weekday in (0, 1, 2, 3, 4) and 13.5 <= hour <= 20.0
+    else:
+        is_open = False
+
+    return "لحظي أثناء التداول" if is_open else "إغلاق رسمي (آخر جلسة مكتملة)"
+
+
 def classify(accumulation_score, rsi):
     if accumulation_score >= 65 and rsi < 70:
         return "تجميع نشط"
@@ -248,6 +265,7 @@ def main():
         output["markets"][market_key] = {
             "label": market["label"],
             "currency": market["currency"],
+            "price_status": market_price_status(market_key),
             "sectors": sectors_out,
         }
 
