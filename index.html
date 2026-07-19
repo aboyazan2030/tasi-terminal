@@ -73,7 +73,7 @@
   .accum-label{display:flex; justify-content:space-between; font-size:10px; color:var(--muted); margin-bottom:3px;}
   .accum-track{width:100%; height:5px; background:var(--border); border-radius:3px; overflow:hidden;}
   .accum-fill{height:100%; background:linear-gradient(90deg, var(--gold-soft), var(--gold));}
-  .levels{display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; font-size:10px; color:var(--muted); border-top:1px solid var(--border); padding-top:9px;}
+  .levels{display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:5px; font-size:9px; color:var(--muted); border-top:1px solid var(--border); padding-top:9px;}
   .levels .v{color:var(--text); font-family:'JetBrains Mono', monospace; font-size:11px; display:block;}
 
   .empty{max-width:1200px; margin:60px auto; text-align:center; color:var(--muted); border:1px dashed var(--border); border-radius:14px; padding:50px 20px;}
@@ -233,6 +233,7 @@ function cardHtml(s, currency) {
         <div>وقف الخسارة<span class="v">${s.stop_loss}</span></div>
         <div>هدف 1<span class="v">${s.target1}</span></div>
         <div>هدف 2<span class="v">${s.target2}</span></div>
+        <div>هدف 3<span class="v">${s.target3}</span></div>
       </div>
     </div>
   `;
