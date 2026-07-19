@@ -165,12 +165,13 @@ def analyze_ticker(symbol, name):
         print(f"[خطأ] {symbol} ({name}): بيانات ناقصة، عدد الصفوف = {0 if hist is None else len(hist)}")
         return None
 
-    closes = hist["Close"]
-    volumes = hist["Volume"]
+    closes = hist["Close"].ffill().bfill()
+    volumes = hist["Volume"].fillna(0)
 
     price = float(closes.iloc[-1])
     prev_price = float(closes.iloc[-2])
     if math.isnan(price) or math.isnan(prev_price) or prev_price == 0:
+        print(f"[خطأ] {symbol} ({name}): سعر غير صالح تمامًا (بيانات فارغة بالكامل)")
         return None
     change_pct = ((price - prev_price) / prev_price) * 100
 
@@ -192,7 +193,7 @@ def analyze_ticker(symbol, name):
     ))
     classification = classify(accumulation_score, rsi14)
 
-    atr = float((hist["High"] - hist["Low"]).tail(14).mean())
+    atr = float((hist["High"].ffill().bfill() - hist["Low"].ffill().bfill()).tail(14).mean())
     stop_loss = round(support - atr * 0.5, 2)
     target1 = round(price + atr * 1.5, 2)
     target2 = round(price + atr * 3, 2)
@@ -219,6 +220,7 @@ def analyze_ticker(symbol, name):
 
     for key, value in row.items():
         if isinstance(value, float) and math.isnan(value):
+            print(f"[خطأ] {symbol} ({name}): الحقل '{key}' طلع NaN — تم تجاهل السهم")
             return None
 
     return row
