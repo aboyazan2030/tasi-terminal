@@ -149,8 +149,8 @@ def market_price_status(market_key):
     hour = now.hour + now.minute / 60
 
     if market_key == "sa":
-        # الأحد-الخميس (weekday 6,0,1,2,3)، 7:00-12:10 UTC تقريبًا
-        is_open = weekday in (6, 0, 1, 2, 3) and 7.0 <= hour <= 12.17
+        # الأحد-الخميس، التداول المستمر + مزاد الإغلاق (يمتد لين ~15:20 بتوقيت الرياض)
+        is_open = weekday in (6, 0, 1, 2, 3) and 7.0 <= hour <= 12.33
     elif market_key == "us":
         # الاثنين-الجمعة (weekday 0-4)، 13:30-20:00 UTC تقريبًا
         is_open = weekday in (0, 1, 2, 3, 4) and 13.5 <= hour <= 20.0
