@@ -29,6 +29,32 @@
   .price-status.live{background:rgba(47,191,131,.15); color:var(--up);}
   .price-status.closed{background:rgba(203,161,53,.15); color:var(--gold);}
 
+  .search-box{
+    max-width:1200px; margin:0 auto 16px; position:relative;
+  }
+  .search-box input{
+    width:100%; padding:12px 16px; border-radius:10px; border:1px solid var(--border);
+    background:var(--surface); color:var(--text); font-family:'IBM Plex Sans Arabic', sans-serif;
+    font-size:14px; outline:none;
+  }
+  .search-box input:focus{border-color:var(--gold);}
+  .search-box input::placeholder{color:var(--muted);}
+  .search-results{
+    position:absolute; top:calc(100% + 6px); right:0; left:0; z-index:10;
+    background:var(--surface); border:1px solid var(--gold-soft); border-radius:10px;
+    max-height:340px; overflow-y:auto; display:none;
+  }
+  .search-results.show{display:block;}
+  .search-result-item{
+    padding:10px 16px; border-bottom:1px solid var(--border); cursor:pointer; font-size:13px;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .search-result-item:last-child{border-bottom:none;}
+  .search-result-item:hover{background:var(--surface-2);}
+  .search-result-item .sr-name{font-weight:600;}
+  .search-result-item .sr-meta{color:var(--muted); font-size:11px;}
+  .search-empty{padding:14px 16px; color:var(--muted); font-size:13px;}
+
   .market-tabs{max-width:1200px; margin:0 auto 16px; display:flex; gap:8px;}
   .market-tab{
     flex:1; text-align:center; padding:12px; border-radius:10px; border:1px solid var(--border);
@@ -61,6 +87,11 @@
   .grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(270px,1fr)); gap:14px;}
   .card{background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px; display:flex; flex-direction:column; gap:10px;}
   .card:hover{border-color:var(--gold-soft);}
+  .card.highlight-flash{animation:flash-border 2s ease-out;}
+  @keyframes flash-border{
+    0%,30%{border-color:var(--gold); box-shadow:0 0 0 3px rgba(203,161,53,.3);}
+    100%{border-color:var(--border); box-shadow:none;}
+  }
   .card-top{display:flex; justify-content:space-between; align-items:flex-start;}
   .stock-name{font-weight:600; font-size:14px;}
   .stock-code{color:var(--muted); font-size:11px;}
@@ -96,6 +127,11 @@
   <span class="updated mono" id="updatedText">جارِ التحميل...</span>
   <span id="priceStatus"></span>
 </header>
+
+<div class="search-box">
+  <input type="text" id="searchInput" placeholder="🔍 ابحث برمز السهم أو اسم الشركة (مثال: 1120 أو الراجحي أو Apple)">
+  <div class="search-results" id="searchResults"></div>
+</div>
 
 <div class="market-tabs" id="marketTabs"></div>
 <div class="top-picks" id="topPicks"></div>
@@ -133,9 +169,93 @@ async function load() {
     renderSectorNav();
     renderContent();
     renderTopPicks();
+
+    buildSearchIndex();
+    setupSearch();
   } catch (e) {
     document.getElementById('updatedText').textContent = 'تعذّر تحميل البيانات';
   }
+}
+
+let SEARCH_INDEX = [];
+
+function buildSearchIndex() {
+  SEARCH_INDEX = [];
+  Object.keys(DATA.markets).forEach(marketKey => {
+    const market = DATA.markets[marketKey];
+    (market.sectors || []).forEach(sector => {
+      sector.stocks.forEach(s => {
+        SEARCH_INDEX.push({
+          market: marketKey,
+          marketLabel: market.label,
+          sector: sector.name,
+          code: s.code,
+          name: s.name,
+        });
+      });
+    });
+  });
+}
+
+function setupSearch() {
+  const input = document.getElementById('searchInput');
+  const results = document.getElementById('searchResults');
+
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    if (!q) { results.classList.remove('show'); results.innerHTML = ''; return; }
+
+    const matches = SEARCH_INDEX.filter(item =>
+      item.code.toLowerCase().includes(q) || item.name.toLowerCase().includes(q)
+    ).slice(0, 10);
+
+    if (matches.length === 0) {
+      results.innerHTML = `<div class="search-empty">لا توجد نتائج مطابقة</div>`;
+    } else {
+      results.innerHTML = matches.map(m => `
+        <div class="search-result-item" data-market="${m.market}" data-sector="${m.sector}" data-code="${m.code}">
+          <div>
+            <div class="sr-name">${m.name}</div>
+            <div class="sr-meta">${m.code} · ${m.sector} · ${m.marketLabel}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+    results.classList.add('show');
+  });
+
+  results.addEventListener('click', (e) => {
+    const item = e.target.closest('.search-result-item');
+    if (!item) return;
+    const { market, sector, code } = item.dataset;
+
+    currentMarket = market;
+    currentSector = sector;
+    renderMarketTabs();
+    renderSectorNav();
+    renderContent();
+    renderTopPicks();
+
+    results.classList.remove('show');
+    input.value = '';
+
+    setTimeout(() => {
+      const target = document.getElementById(`stock-${market}-${code}`);
+      if (target) {
+        if (typeof target.scrollIntoView === 'function') {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        target.classList.add('highlight-flash');
+        setTimeout(() => target.classList.remove('highlight-flash'), 2000);
+      }
+    }, 100);
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.search-box')) {
+      results.classList.remove('show');
+    }
+  });
 }
 
 function getFirstSectorName(marketKey) {
@@ -224,18 +344,18 @@ function renderContent() {
         <span class="score">درجة التجميع: ${sector.score}</span>
       </div>
       <div class="grid">
-        ${sector.stocks.map(s => cardHtml(s, market.currency)).join('')}
+        ${sector.stocks.map(s => cardHtml(s, market.currency, currentMarket)).join('')}
       </div>
     </div>
   `;
 }
 
-function cardHtml(s, currency) {
+function cardHtml(s, currency, marketKey) {
   const changeClass = s.change_pct >= 0 ? 'up' : 'down';
   const changeSign = s.change_pct >= 0 ? '+' : '';
   const badgeClass = s.classification.replace(/ /g, '-');
   return `
-    <div class="card">
+    <div class="card" id="stock-${marketKey}-${s.code}">
       <div class="card-top">
         <div>
           <div class="stock-name">${s.name}</div>
