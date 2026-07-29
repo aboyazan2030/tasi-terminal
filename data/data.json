@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-29T21:24:36.242718Z",
+  "updated_at": "2026-07-29T22:27:08.014853Z",
   "markets": {
     "sa": {
       "label": "السوق السعودي",
@@ -12064,7 +12064,7 @@
               "classification": "تشبع شرائي",
               "support": 911.52,
               "resistance": 974.03,
-              "week52_low": 846.26,
+              "week52_low": 846.27,
               "week52_high": 1092.58,
               "stop_loss": 903.53,
               "target1": 998.02,
