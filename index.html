@@ -55,6 +55,62 @@
   .search-result-item .sr-meta{color:var(--muted); font-size:11px;}
   .search-empty{padding:14px 16px; color:var(--muted); font-size:13px;}
 
+  .toolbar{max-width:1200px; margin:0 auto 16px; display:flex; gap:8px; flex-wrap:wrap; align-items:center;}
+  .toolbar select{
+    padding:8px 12px; border-radius:8px; border:1px solid var(--border); background:var(--surface);
+    color:var(--text); font-family:'IBM Plex Sans Arabic', sans-serif; font-size:12px; outline:none;
+  }
+  .toolbar-btn{
+    padding:8px 14px; border-radius:8px; border:1px solid var(--border); background:var(--surface);
+    color:var(--muted); font-size:12px; cursor:pointer; white-space:nowrap;
+  }
+  .toolbar-btn.active{border-color:var(--gold); color:var(--gold); background:rgba(203,161,53,.08);}
+  .lang-btn{
+    margin-right:auto; padding:6px 12px; border-radius:8px; border:1px solid var(--border);
+    background:var(--surface); color:var(--muted); font-size:11px; cursor:pointer; font-family:'JetBrains Mono', monospace;
+  }
+
+  .star-btn{
+    background:none; border:none; cursor:pointer; font-size:16px; color:var(--muted); padding:0; line-height:1;
+  }
+  .star-btn.active{color:var(--gold);}
+
+  .compare-check{
+    position:absolute; top:10px; left:10px; width:20px; height:20px; cursor:pointer;
+  }
+
+  .heatmap-grid{
+    max-width:1200px; margin:0 auto 34px; display:grid; grid-template-columns:repeat(auto-fill, minmax(140px,1fr)); gap:8px;
+  }
+  .heatmap-cell{
+    border-radius:10px; padding:14px 10px; cursor:pointer; text-align:center; border:1px solid var(--border);
+  }
+  .heatmap-cell .hm-name{font-size:11px; font-weight:600; margin-bottom:6px;}
+  .heatmap-cell .hm-score{font-family:'JetBrains Mono', monospace; font-size:18px; font-weight:700;}
+
+  .compare-panel{
+    max-width:1200px; margin:0 auto 26px; background:var(--surface); border:1px solid var(--gold-soft);
+    border-radius:14px; padding:18px 20px; overflow-x:auto;
+  }
+  .compare-panel table{width:100%; border-collapse:collapse; font-size:12px;}
+  .compare-panel th, .compare-panel td{padding:8px 10px; text-align:center; border-bottom:1px solid var(--border);}
+  .compare-panel th{color:var(--gold); font-family:'Space Grotesk', sans-serif;}
+  .compare-panel td.metric-label{text-align:right; color:var(--muted);}
+
+  .workflow-status{
+    max-width:1200px; margin:0 auto 16px; display:flex; gap:8px; font-size:11px; color:var(--muted);
+    font-family:'JetBrains Mono', monospace; flex-wrap:wrap;
+  }
+  .workflow-status .run-dot{display:inline-block; width:8px; height:8px; border-radius:50%; margin-left:5px;}
+  .workflow-status .run-dot.success{background:var(--up);}
+  .workflow-status .run-dot.failure{background:var(--down);}
+  .workflow-status .run-dot.pending{background:var(--gold);}
+
+  .trend-badge{font-size:10px; padding:2px 8px; border-radius:6px; margin-right:6px;}
+  .trend-badge.up{background:rgba(47,191,131,.12); color:var(--up);}
+  .trend-badge.down{background:rgba(229,72,77,.12); color:var(--down);}
+  .trend-badge.flat{background:rgba(124,148,140,.12); color:var(--muted);}
+
   .market-tabs{max-width:1200px; margin:0 auto 16px; display:flex; gap:8px;}
   .market-tab{
     flex:1; text-align:center; padding:12px; border-radius:10px; border:1px solid var(--border);
@@ -85,7 +141,7 @@
   .sector-title .score{font-family:'JetBrains Mono', monospace; color:var(--gold); font-size:15px;}
 
   .grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(270px,1fr)); gap:14px;}
-  .card{background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px; display:flex; flex-direction:column; gap:10px;}
+  .card{background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px; display:flex; flex-direction:column; gap:10px; position:relative;}
   .card:hover{border-color:var(--gold-soft);}
   .card.highlight-flash{animation:flash-border 2s ease-out;}
   @keyframes flash-border{
@@ -122,11 +178,18 @@
 <body>
 
 <header>
-  <span class="eyebrow">Tasi Terminal · مرحلة 2 — كل القطاعات</span>
-  <h1>لوحة السوق السعودي والأمريكي</h1>
+  <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+    <div>
+      <span class="eyebrow">Tasi Terminal · مرحلة 3 — تطويرات إضافية</span>
+      <h1 id="pageTitle">لوحة السوق السعودي والأمريكي</h1>
+    </div>
+    <button class="lang-btn" id="langBtn">EN</button>
+  </div>
   <span class="updated mono" id="updatedText">جارِ التحميل...</span>
   <span id="priceStatus"></span>
 </header>
+
+<div class="workflow-status" id="workflowStatus"></div>
 
 <div class="search-box">
   <input type="text" id="searchInput" placeholder="🔍 ابحث برمز السهم أو اسم الشركة (مثال: 1120 أو الراجحي أو Apple)">
@@ -134,8 +197,25 @@
 </div>
 
 <div class="market-tabs" id="marketTabs"></div>
+
+<div class="toolbar" id="toolbar">
+  <select id="sortSelect">
+    <option value="score">فرز: درجة التجميع</option>
+    <option value="rsi">فرز: RSI14</option>
+    <option value="volume">فرز: نسبة الحجم</option>
+    <option value="change">فرز: % التغير</option>
+    <option value="name">فرز: الاسم</option>
+  </select>
+  <button class="toolbar-btn" id="watchlistBtn">⭐ قائمة المتابعة</button>
+  <button class="toolbar-btn" id="compareBtn">⇄ مقارنة</button>
+  <button class="toolbar-btn" id="heatmapBtn">🗺 خريطة حرارية</button>
+</div>
+
+<div class="compare-panel" id="comparePanel" style="display:none;"></div>
+
 <div class="top-picks" id="topPicks"></div>
 <div class="sector-nav" id="sectorNav"></div>
+<div class="heatmap-grid" id="heatmapGrid" style="display:none;"></div>
 <div id="content"></div>
 
 <div class="empty" id="emptyState" style="display:none;">
@@ -143,12 +223,75 @@
   <p>شغّل الـ Workflow يدويًا من تبويب Actions في GitHub (زر "Run workflow")، أو انتظر أول تشغيل مجدول تلقائيًا.</p>
 </div>
 
-<footer>البيانات تُحدَّث تلقائيًا عبر GitHub Actions من مصدر بيانات علني — للأغراض التحليلية فقط وليست توصية استثمارية.</footer>
+<footer id="footerText">البيانات تُحدَّث تلقائيًا عبر GitHub Actions من مصدر بيانات علني — للأغراض التحليلية فقط وليست توصية استثمارية.</footer>
 
 <script>
 let DATA = null;
 let currentMarket = 'sa';
 let currentSector = null;
+let currentSort = 'score';
+let viewMode = 'normal'; // normal | watchlist | heatmap
+let compareMode = false;
+let compareSelection = [];
+let currentLang = 'ar';
+
+const STRINGS = {
+  ar: {
+    title: 'لوحة السوق السعودي والأمريكي',
+    searchPlaceholder: '🔍 ابحث برمز السهم أو اسم الشركة (مثال: 1120 أو الراجحي أو Apple)',
+    noResults: 'لا توجد نتائج مطابقة',
+    watchlistBtn: '⭐ قائمة المتابعة',
+    compareBtn: '⇄ مقارنة',
+    heatmapBtn: '🗺 خريطة حرارية',
+    sortScore: 'فرز: درجة التجميع', sortRsi: 'فرز: RSI14', sortVolume: 'فرز: نسبة الحجم',
+    sortChange: 'فرز: % التغير', sortName: 'فرز: الاسم',
+    topPicksTitle: '⭐ أفضل 5 فرص تجميع —',
+    accumScore: 'درجة التجميع:', rsi: 'RSI14', volRatio: 'نسبة الحجم',
+    stopLoss: 'وقف الخسارة', target1: 'هدف 1', target2: 'هدف 2', target3: 'هدف 3',
+    watchlistEmpty: 'قائمة المتابعة فاضية — اضغط ⭐ على أي سهم لإضافته',
+    footerText: 'البيانات تُحدَّث تلقائيًا عبر GitHub Actions من مصدر بيانات علني — للأغراض التحليلية فقط وليست توصية استثمارية.',
+    compareTitle: 'مقارنة الأسهم', compareHint: 'اختر سهمين (اضغط المربع أعلى يسار البطاقة) للمقارنة',
+    heatmapTitle: 'خريطة حرارية للقطاعات',
+  },
+  en: {
+    title: 'Saudi & US Market Dashboard',
+    searchPlaceholder: '🔍 Search by ticker or company name (e.g. 1120 or Al Rajhi or Apple)',
+    noResults: 'No matching results',
+    watchlistBtn: '⭐ Watchlist',
+    compareBtn: '⇄ Compare',
+    heatmapBtn: '🗺 Heatmap',
+    sortScore: 'Sort: Accumulation', sortRsi: 'Sort: RSI14', sortVolume: 'Sort: Volume Ratio',
+    sortChange: 'Sort: % Change', sortName: 'Sort: Name',
+    topPicksTitle: '⭐ Top 5 Accumulation Picks —',
+    accumScore: 'Accumulation:', rsi: 'RSI14', volRatio: 'Volume Ratio',
+    stopLoss: 'Stop Loss', target1: 'Target 1', target2: 'Target 2', target3: 'Target 3',
+    watchlistEmpty: 'Watchlist is empty — click ⭐ on any stock to add it',
+    footerText: 'Data updates automatically via GitHub Actions from a public data source — for analysis purposes only, not investment advice.',
+    compareTitle: 'Compare Stocks', compareHint: 'Select two stocks (check box top-left of card) to compare',
+    heatmapTitle: 'Sector Heatmap',
+  },
+};
+function t(key) { return (STRINGS[currentLang] && STRINGS[currentLang][key]) || key; }
+
+function getWatchlist() {
+  try {
+    return JSON.parse(localStorage.getItem('tasi_watchlist') || '[]');
+  } catch (e) { return []; }
+}
+function saveWatchlist(list) {
+  try { localStorage.setItem('tasi_watchlist', JSON.stringify(list)); } catch (e) {}
+}
+function toggleWatchlist(market, code) {
+  const key = `${market}:${code}`;
+  let list = getWatchlist();
+  if (list.includes(key)) list = list.filter(k => k !== key);
+  else list.push(key);
+  saveWatchlist(list);
+  return list;
+}
+function isWatchlisted(market, code) {
+  return getWatchlist().includes(`${market}:${code}`);
+}
 
 async function load() {
   try {
@@ -172,6 +315,9 @@ async function load() {
 
     buildSearchIndex();
     setupSearch();
+    setupToolbar();
+    setupLangToggle();
+    fetchWorkflowStatus();
   } catch (e) {
     document.getElementById('updatedText').textContent = 'تعذّر تحميل البيانات';
   }
@@ -274,6 +420,13 @@ function renderMarketTabs() {
     el.addEventListener('click', () => {
       currentMarket = el.dataset.market;
       currentSector = getFirstSectorName(currentMarket);
+      viewMode = 'normal';
+      compareMode = false;
+      compareSelection = [];
+      document.getElementById('heatmapGrid').style.display = 'none';
+      document.getElementById('comparePanel').style.display = 'none';
+      document.getElementById('content').style.display = '';
+      document.getElementById('sectorNav').style.display = '';
       renderMarketTabs(); renderSectorNav(); renderContent(); renderTopPicks();
     });
   });
@@ -325,6 +478,221 @@ function renderTopPicks() {
   `;
 }
 
+function setupToolbar() {
+  const sortSelect = document.getElementById('sortSelect');
+  sortSelect.value = currentSort;
+  sortSelect.addEventListener('change', () => {
+    currentSort = sortSelect.value;
+    if (viewMode === 'watchlist') renderWatchlistView();
+    else renderContent();
+  });
+
+  document.getElementById('watchlistBtn').addEventListener('click', () => {
+    viewMode = (viewMode === 'watchlist') ? 'normal' : 'watchlist';
+    compareMode = false;
+    updateToolbarActiveStates();
+    if (viewMode === 'watchlist') {
+      document.getElementById('heatmapGrid').style.display = 'none';
+      document.getElementById('sectorNav').style.display = 'none';
+      document.getElementById('comparePanel').style.display = 'none';
+      document.getElementById('content').style.display = '';
+      renderWatchlistView();
+    } else {
+      document.getElementById('sectorNav').style.display = '';
+      renderContent();
+    }
+  });
+
+  document.getElementById('compareBtn').addEventListener('click', () => {
+    compareMode = !compareMode;
+    if (!compareMode) { compareSelection = []; document.getElementById('comparePanel').style.display = 'none'; }
+    updateToolbarActiveStates();
+    if (viewMode === 'watchlist') renderWatchlistView(); else renderContent();
+  });
+
+  document.getElementById('heatmapBtn').addEventListener('click', () => {
+    viewMode = (viewMode === 'heatmap') ? 'normal' : 'heatmap';
+    compareMode = false;
+    updateToolbarActiveStates();
+    if (viewMode === 'heatmap') {
+      document.getElementById('sectorNav').style.display = 'none';
+      document.getElementById('content').style.display = 'none';
+      document.getElementById('comparePanel').style.display = 'none';
+      renderHeatmap();
+    } else {
+      document.getElementById('sectorNav').style.display = '';
+      document.getElementById('content').style.display = '';
+      document.getElementById('heatmapGrid').style.display = 'none';
+      renderContent();
+    }
+  });
+}
+
+function updateToolbarActiveStates() {
+  document.getElementById('watchlistBtn').classList.toggle('active', viewMode === 'watchlist');
+  document.getElementById('heatmapBtn').classList.toggle('active', viewMode === 'heatmap');
+  document.getElementById('compareBtn').classList.toggle('active', compareMode);
+}
+
+function sortStocks(stocks) {
+  const arr = [...stocks];
+  switch (currentSort) {
+    case 'rsi': return arr.sort((a, b) => b.rsi14 - a.rsi14);
+    case 'volume': return arr.sort((a, b) => b.volume_ratio - a.volume_ratio);
+    case 'change': return arr.sort((a, b) => b.change_pct - a.change_pct);
+    case 'name': return arr.sort((a, b) => a.name.localeCompare(b.name));
+    default: return arr.sort((a, b) => b.accumulation_score - a.accumulation_score);
+  }
+}
+
+function renderWatchlistView() {
+  const list = getWatchlist();
+  const content = document.getElementById('content');
+  if (list.length === 0) {
+    content.innerHTML = `<div class="empty"><h2>${t('watchlistEmpty')}</h2></div>`;
+    return;
+  }
+  const stocks = [];
+  Object.keys(DATA.markets).forEach(marketKey => {
+    const market = DATA.markets[marketKey];
+    (market.sectors || []).forEach(sector => {
+      sector.stocks.forEach(s => {
+        if (list.includes(`${marketKey}:${s.code}`)) {
+          stocks.push({ ...s, __market: marketKey, __currency: market.currency });
+        }
+      });
+    });
+  });
+  const sorted = sortStocks(stocks);
+  content.innerHTML = `
+    <div class="sector-block">
+      <div class="sector-title"><h2>${t('watchlistBtn')}</h2></div>
+      <div class="grid">
+        ${sorted.map(s => cardHtml(s, s.__currency, s.__market)).join('')}
+      </div>
+    </div>
+  `;
+  attachCardEvents();
+}
+
+function renderHeatmap() {
+  const market = DATA.markets[currentMarket];
+  const grid = document.getElementById('heatmapGrid');
+  grid.style.display = 'grid';
+  grid.innerHTML = market.sectors.map(s => {
+    const score = s.score;
+    const hue = Math.round((score / 100) * 120); // 0=red, 120=green
+    return `
+      <div class="heatmap-cell" data-sector="${s.name}" style="background:hsla(${hue},55%,22%,1); border-color:hsla(${hue},55%,40%,1);">
+        <div class="hm-name">${s.name}</div>
+        <div class="hm-score" style="color:hsl(${hue},70%,65%);">${score}</div>
+      </div>
+    `;
+  }).join('');
+  grid.querySelectorAll('.heatmap-cell').forEach(cell => {
+    cell.addEventListener('click', () => {
+      currentSector = cell.dataset.sector;
+      viewMode = 'normal';
+      updateToolbarActiveStates();
+      grid.style.display = 'none';
+      document.getElementById('sectorNav').style.display = '';
+      document.getElementById('content').style.display = '';
+      renderSectorNav();
+      renderContent();
+    });
+  });
+}
+
+function toggleCompareSelect(market, code, stock) {
+  const key = `${market}:${code}`;
+  const idx = compareSelection.findIndex(c => c.key === key);
+  if (idx >= 0) {
+    compareSelection.splice(idx, 1);
+  } else {
+    if (compareSelection.length >= 2) compareSelection.shift();
+    compareSelection.push({ key, market, code, stock });
+  }
+  renderComparePanel();
+  if (viewMode === 'watchlist') renderWatchlistView(); else renderContent();
+}
+
+function renderComparePanel() {
+  const panel = document.getElementById('comparePanel');
+  if (compareSelection.length < 2) {
+    panel.style.display = compareMode ? 'block' : 'none';
+    panel.innerHTML = compareMode ? `<p style="color:var(--muted); font-size:13px;">${t('compareHint')}</p>` : '';
+    return;
+  }
+  panel.style.display = 'block';
+  const [a, b] = compareSelection.map(c => c.stock);
+  const rows = [
+    ['السعر', a.price, b.price],
+    [t('accumScore').replace(':', ''), a.accumulation_score, b.accumulation_score],
+    [t('rsi'), a.rsi14, b.rsi14],
+    [t('volRatio'), a.volume_ratio, b.volume_ratio],
+    ['% التغير', a.change_pct, b.change_pct],
+    [t('stopLoss'), a.stop_loss, b.stop_loss],
+    [t('target1'), a.target1, b.target1],
+    [t('target2'), a.target2, b.target2],
+    ['الاتجاه', a.trend || '-', b.trend || '-'],
+  ];
+  panel.innerHTML = `
+    <h2 style="font-family:'Space Grotesk',sans-serif; color:var(--gold); font-size:16px; margin-bottom:12px;">${t('compareTitle')}</h2>
+    <table>
+      <tr><th></th><th>${a.name}</th><th>${b.name}</th></tr>
+      ${rows.map(r => `<tr><td class="metric-label">${r[0]}</td><td class="mono">${r[1]}</td><td class="mono">${r[2]}</td></tr>`).join('')}
+    </table>
+  `;
+}
+
+function setupLangToggle() {
+  document.getElementById('langBtn').addEventListener('click', () => {
+    currentLang = (currentLang === 'ar') ? 'en' : 'ar';
+    document.getElementById('langBtn').textContent = (currentLang === 'ar') ? 'EN' : 'ع';
+    document.documentElement.lang = currentLang;
+    document.documentElement.dir = (currentLang === 'ar') ? 'rtl' : 'ltr';
+    applyLangStrings();
+    if (viewMode === 'watchlist') renderWatchlistView();
+    else if (viewMode === 'heatmap') renderHeatmap();
+    else renderContent();
+    renderTopPicks();
+  });
+}
+
+function applyLangStrings() {
+  document.getElementById('pageTitle').textContent = t('title');
+  document.getElementById('searchInput').placeholder = t('searchPlaceholder');
+  document.getElementById('watchlistBtn').textContent = t('watchlistBtn');
+  document.getElementById('compareBtn').textContent = t('compareBtn');
+  document.getElementById('heatmapBtn').textContent = t('heatmapBtn');
+  document.getElementById('footerText').textContent = t('footerText');
+  const sortSelect = document.getElementById('sortSelect');
+  sortSelect.options[0].textContent = t('sortScore');
+  sortSelect.options[1].textContent = t('sortRsi');
+  sortSelect.options[2].textContent = t('sortVolume');
+  sortSelect.options[3].textContent = t('sortChange');
+  sortSelect.options[4].textContent = t('sortName');
+}
+
+async function fetchWorkflowStatus() {
+  const wrap = document.getElementById('workflowStatus');
+  try {
+    const res = await fetch('https://api.github.com/repos/aboyazan2030/tasi-terminal/actions/runs?per_page=2');
+    if (!res.ok) throw new Error('bad response');
+    const data = await res.json();
+    const runs = (data.workflow_runs || []).slice(0, 2);
+    if (runs.length === 0) { wrap.innerHTML = ''; return; }
+    wrap.innerHTML = runs.map(r => {
+      let dotClass = 'pending';
+      if (r.status === 'completed') dotClass = (r.conclusion === 'success') ? 'success' : 'failure';
+      const when = new Date(r.created_at).toLocaleString('ar-SA', { dateStyle: 'short', timeStyle: 'short' });
+      return `<span><span class="run-dot ${dotClass}"></span>${when}</span>`;
+    }).join(' · ');
+  } catch (e) {
+    wrap.innerHTML = '';
+  }
+}
+
 function renderContent() {
   const market = DATA.markets[currentMarket];
   const content = document.getElementById('content');
@@ -337,50 +705,86 @@ function renderContent() {
   const sector = market.sectors.find(s => s.name === currentSector);
   if (!sector) { content.innerHTML = ''; return; }
 
+  const sortedStocks = sortStocks(sector.stocks);
+
   content.innerHTML = `
     <div class="sector-block">
       <div class="sector-title">
         <h2>${sector.name}</h2>
-        <span class="score">درجة التجميع: ${sector.score}</span>
+        <span class="score">${t('accumScore')} ${sector.score}</span>
       </div>
       <div class="grid">
-        ${sector.stocks.map(s => cardHtml(s, market.currency, currentMarket)).join('')}
+        ${sortedStocks.map(s => cardHtml(s, market.currency, currentMarket)).join('')}
       </div>
     </div>
   `;
+  attachCardEvents();
 }
 
 function cardHtml(s, currency, marketKey) {
   const changeClass = s.change_pct >= 0 ? 'up' : 'down';
   const changeSign = s.change_pct >= 0 ? '+' : '';
   const badgeClass = s.classification.replace(/ /g, '-');
+  const watched = isWatchlisted(marketKey, s.code);
+  const isSelected = compareSelection.some(c => c.key === `${marketKey}:${s.code}`);
+  const trendClass = s.trend === 'صاعد' ? 'up' : (s.trend === 'هابط' ? 'down' : 'flat');
   return `
     <div class="card" id="stock-${marketKey}-${s.code}">
+      ${compareMode ? `<input type="checkbox" class="compare-check" data-market="${marketKey}" data-code="${s.code}" ${isSelected ? 'checked' : ''} title="اختر للمقارنة">` : ''}
       <div class="card-top">
         <div>
           <div class="stock-name">${s.name}</div>
           <div class="stock-code mono">${s.code}</div>
         </div>
-        <div>
-          <div class="price">${s.price} <span style="font-size:11px;color:var(--muted)">${currency}</span></div>
-          <div class="change ${changeClass}">${changeSign}${s.change_pct}%</div>
+        <div style="display:flex; align-items:flex-start; gap:8px;">
+          <button class="star-btn ${watched ? 'active' : ''}" data-market="${marketKey}" data-code="${s.code}" title="أضف لقائمة المتابعة">${watched ? '★' : '☆'}</button>
+          <div>
+            <div class="price">${s.price} <span style="font-size:11px;color:var(--muted)">${currency}</span></div>
+            <div class="change ${changeClass}">${changeSign}${s.change_pct}%</div>
+          </div>
         </div>
       </div>
-      <span class="badge ${badgeClass}">${s.classification}</span>
       <div>
-        <div class="accum-label"><span>درجة التجميع</span><span class="mono">${s.accumulation_score}</span></div>
+        <span class="badge ${badgeClass}">${s.classification}</span>
+        ${s.trend ? `<span class="trend-badge ${trendClass}">${s.trend}</span>` : ''}
+      </div>
+      <div>
+        <div class="accum-label"><span>${t('accumScore').replace(':', '')}</span><span class="mono">${s.accumulation_score}</span></div>
         <div class="accum-track"><div class="accum-fill" style="width:${s.accumulation_score}%"></div></div>
       </div>
-      <div class="metric-row"><span>RSI14</span><span class="val">${s.rsi14}</span></div>
-      <div class="metric-row"><span>نسبة الحجم</span><span class="val">×${s.volume_ratio}</span></div>
+      <div class="metric-row"><span>${t('rsi')}</span><span class="val">${s.rsi14}</span></div>
+      <div class="metric-row"><span>${t('volRatio')}</span><span class="val">×${s.volume_ratio}</span></div>
       <div class="levels">
-        <div>وقف الخسارة<span class="v">${s.stop_loss}</span></div>
-        <div>هدف 1<span class="v">${s.target1}</span></div>
-        <div>هدف 2<span class="v">${s.target2}</span></div>
-        <div>هدف 3<span class="v">${s.target3}</span></div>
+        <div>${t('stopLoss')}<span class="v">${s.stop_loss}</span></div>
+        <div>${t('target1')}<span class="v">${s.target1}</span></div>
+        <div>${t('target2')}<span class="v">${s.target2}</span></div>
+        <div>${t('target3')}<span class="v">${s.target3}</span></div>
       </div>
     </div>
   `;
+}
+
+function attachCardEvents() {
+  document.querySelectorAll('.star-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const { market, code } = btn.dataset;
+      toggleWatchlist(market, code);
+      if (viewMode === 'watchlist') renderWatchlistView(); else renderContent();
+    });
+  });
+  document.querySelectorAll('.compare-check').forEach(chk => {
+    chk.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const { market, code } = chk.dataset;
+      const market_ = DATA.markets[market];
+      let foundStock = null;
+      (market_.sectors || []).forEach(sec => {
+        sec.stocks.forEach(s => { if (s.code === code) foundStock = s; });
+      });
+      if (foundStock) toggleCompareSelect(market, code, foundStock);
+    });
+  });
 }
 
 load();
