@@ -44,7 +44,7 @@ SECTORS = {
                 "7020.SR": "موبايلي",
                 "4142.SR": "الرياض للكابلات",
                 "7030.SR": "زين السعودية",
-                "7040.SR": "Etihad GO Telecom Co.",
+                "7040.SR": "اتحاد جو للاتصالات",
                 "2370.SR": "الشرق الأوسط للكابلات المتخصصة",
                 "2110.SR": "الكابلات السعودية",
             },
@@ -62,26 +62,26 @@ SECTORS = {
                 "1304.SR": "اليمامة للصناعات الحديدية",
                 "2300.SR": "السعودية لصناعة الورق",
                 "2240.SR": "الإنماء للمباني المتقدمة",
-                "1202.SR": "Middle East Company for Manufacturing and Producing Paper",
+                "1202.SR": "الشرق الأوسط لصناعة وإنتاج الورق",
                 "2200.SR": "الأنابيب العربية",
-                "4143.SR": "Al Taiseer Group TALCO Industrial Company",
+                "4143.SR": "التيسير القابضة للصناعة (تالكو)",
                 "2150.SR": "الوطنية للصناعات الزجاجية",
                 "4230.SR": "البحر الأحمر العالمية",
                 "1323.SR": "المتحدة للصناعات الكرتونية",
                 "2120.SR": "المتطورة",
-                "2340.SR": "Artex Industrial Investment Company",
-                "4145.SR": "Al Obeikan Glass Company",
-                "4148.SR": "Alwasail Industrial Company",
+                "2340.SR": "أرتيكس للاستثمار الصناعي",
+                "4145.SR": "العبيكان للزجاج",
+                "4148.SR": "الوصائل الصناعية",
                 "1210.SR": "الصناعات الكيماوية الأساسية",
-                "2160.SR": "The Saudi Arabian Amiantit Company",
+                "2160.SR": "أميانتيت العربية السعودية",
                 "1301.SR": "المصانع المتحدة للأسلاك",
-                "4140.SR": "Saudi Industrial Export Company",
+                "4140.SR": "الصادرات الصناعية السعودية",
                 "2090.SR": "الجبس الوطنية",
                 "2210.SR": "نماء للكيماويات",
-                "2220.SR": "National Metal Manufacturing and Casting Co.",
+                "2220.SR": "الوطنية لتصنيع وتشكيل المعادن",
                 "1201.SR": "تكوين للصناعات المتقدمة",
-                "2180.SR": "Filling and Packing Materials Manufacturing Company",
-                "2360.SR": "Saudi Vitrified Clay Pipe Company",
+                "2180.SR": "صناعة مواد التعبئة والتغليف",
+                "2360.SR": "أنابيب الفخار السعودية",
             },
             "المرافق": {
                 "2082.SR": "أكوا باور",
@@ -91,10 +91,10 @@ SECTORS = {
                 "2320.SR": "الببطين",
                 "2081.SR": "الخرافي للمياه",
                 "1834.SR": "الموارد للقوى العاملة",
-                "4146.SR": "Gas Arabian Services Company",
-                "2084.SR": "Miahona Company Limited",
-                "1833.SR": "Almawarid Manpower Company",
-                "2282.SR": "Naqi Water Company",
+                "4146.SR": "غاز العربية للخدمات",
+                "2084.SR": "مياهنا المحدودة",
+                "1833.SR": "الموارد البشرية (الموارد)",
+                "2282.SR": "مياه نقي",
             },
             "الرعاية الصحية والأدوية": {
                 "4013.SR": "د. سليمان الحبيب",
@@ -110,8 +110,8 @@ SECTORS = {
                 "2070.SR": "الصناعات الدوائية",
                 "4009.SR": "الشرق الأوسط للرعاية الصحية",
                 "4016.SR": "الشرق الأوسط للصناعات الدوائية",
-                "4014.SR": "Scientific and Medical Equipment House Company",
-                "4021.SR": "Canadian General Medical Center Complex Company",
+                "4014.SR": "دار المعدات العلمية والطبية",
+                "4021.SR": "مجمع المركز الطبي الكندي العام",
             },
             "البتروكيماويات": {
                 "2020.SR": "سافكو",
@@ -132,8 +132,8 @@ SECTORS = {
                 "8313.SR": "رصان لتقنية المعلومات",
                 "7200.SR": "المعمر لنظم المعلومات",
                 "6017.SR": "جاهز",
-                "7211.SR": "Saudi Azm for Communication and Information Technology Company",
-                "7201.SR": "Arab Sea Information Systems Company",
+                "7211.SR": "عظم السعودية للاتصالات وتقنية المعلومات",
+                "7201.SR": "بحر العرب لنظم المعلومات",
             },
             "الأغذية": {
                 "2280.SR": "المراعي",
@@ -149,11 +149,11 @@ SECTORS = {
                 "6001.SR": "حلواني إخوان",
                 "6014.SR": "علمر للأغذية (كودو)",
                 "6002.SR": "هرفي",
-                "2288.SR": "Nofoth Food Products Company",
-                "6016.SR": "Shatirah House Restaurant Co.",
+                "2288.SR": "نفوذ لمنتجات الأغذية",
+                "6016.SR": "بيت الشطيرة للمطاعم",
                 "6050.SR": "الأسماك السعودية",
-                "6013.SR": "Development Works Food Company",
-                "6012.SR": "Raydan Food Company",
+                "6013.SR": "أعمال التطوير الغذائية",
+                "6012.SR": "ريدان للأغذية",
             },
             "الاستثمار المتعدد": {
                 "4280.SR": "المملكة القابضة",
@@ -162,21 +162,21 @@ SECTORS = {
                 "4090.SR": "طيبة للاستثمار",
                 "6004.SR": "كاتيرين",
                 "4007.SR": "الحمادي القابضة",
-                "2190.SR": "Sustained Infrastructure Holding Company",
+                "2190.SR": "البنية التحتية المستدامة القابضة",
                 "4083.SR": "المتحدة الدولية القابضة",
-                "4240.SR": "AFG International Company",
-                "4080.SR": "Sinad Holding Company",
-                "2140.SR": "Ayyan Investment Company",
+                "4240.SR": "المجموعة الأفريقية الدولية",
+                "4080.SR": "سناد القابضة",
+                "2140.SR": "أيان للاستثمار",
                 "1214.SR": "شاكر",
-                "1324.SR": "Saleh Abdulaziz Al Rashed & Sons Co.",
-                "4147.SR": "Consolidated Grunenfelder Saady Holding Company",
-                "4180.SR": "Fitaihi Holding Group",
-                "1820.SR": "BAAN Holding Group Company",
-                "4130.SR": "Darb Saudi Investment Company",
+                "1324.SR": "صالح عبدالعزيز الراشد وأولاده",
+                "4147.SR": "غرونينفيلدر سعدي القابضة",
+                "4180.SR": "الفطيحي القابضة",
+                "1820.SR": "بان القابضة",
+                "4130.SR": "درب السعودية للاستثمار",
                 "4061.SR": "أنعام القابضة",
-                "6020.SR": "Al Gassim Investment Holding Company",
-                "3008.SR": "Al Kathiri Holding Company",
-                "4160.SR": "Thimar Development Holding Company",
+                "6020.SR": "القصيم القابضة للاستثمار",
+                "3008.SR": "الكثيري القابضة",
+                "4160.SR": "ثمار القابضة للتنمية",
             },
             "النقل": {
                 "4030.SR": "البحري",
@@ -189,15 +189,15 @@ SECTORS = {
                 "4262.SR": "لومي لتأجير السيارات",
                 "4261.SR": "ذيب لتأجير السيارات",
                 "4040.SR": "النقل الجماعي السعودية",
-                "4110.SR": "Batic Investments and Logistics Company",
-                "1832.SR": "Sadr Logistics Company",
+                "4110.SR": "باتك للاستثمار والخدمات اللوجستية",
+                "1832.SR": "صدر لوجستيك",
             },
             "التأمين": {
                 "8210.SR": "بوبا العربية",
                 "8010.SR": "التعاونية",
                 "8230.SR": "الراجحي تكافل",
                 "8200.SR": "إعادة التأمين السعودية",
-                "8030.SR": "The Mediterranean and Gulf Cooperative Insurance and Reinsurance Company",
+                "8030.SR": "المتوسط والخليج للتأمين التعاوني وإعادة التأمين",
                 "8250.SR": "مجموعة الخليج للتأمين",
                 "8060.SR": "والاء للتأمين التعاوني",
                 "8070.SR": "الدرع العربي للتأمين التعاوني",
@@ -206,7 +206,7 @@ SECTORS = {
                 "8120.SR": "اتحاد الخليج الأهلية للتأمين التعاوني",
                 "8040.SR": "المتكاملة للتأمين",
                 "8300.SR": "الوطنية للتأمين",
-                "8280.SR": "Liva Insurance Company",
+                "8280.SR": "ليفا للتأمين",
                 "8020.SR": "ملاذ للتأمين التعاوني",
                 "8160.SR": "أروى للتأمين التعاوني",
                 "8180.SR": "الصقر للتأمين التعاوني",
@@ -231,32 +231,32 @@ SECTORS = {
                 "4150.SR": "طيبة",
                 "4310.SR": "المدينة الاقتصادية للمعرفة",
                 "4327.SR": "الرمز العقارية",
-                "4326.SR": "Dar Al Majed Real Estate Company",
-                "4323.SR": "Sumou Real Estate Company",
-                "4320.SR": "Alandalus Property Company",
-                "4324.SR": "Banan Real Estate Company",
+                "4326.SR": "دار الماجد العقارية",
+                "4323.SR": "سمو العقارية",
+                "4320.SR": "الأندلس العقارية",
+                "4324.SR": "بنان العقارية",
                 "2130.SR": "الصناعية السعودية",
-                "6090.SR": "Jazan Development and Investment Company",
-                "6060.SR": "Ash-Sharqiyah Development Co.",
+                "6090.SR": "جازان للتطوير والاستثمار",
+                "6060.SR": "الشرقية للتطوير",
             },
             "التجزئة": {
                 "4190.SR": "جرير",
                 "4161.SR": "بن داود القابضة",
                 "4003.SR": "إكسترا",
                 "4001.SR": "العثيم",
-                "4192.SR": "Al-Saif Stores for Development & Investment Company",
-                "4193.SR": "Nice One Beauty Digital Marketing Company",
-                "4191.SR": "Abdullah Saad Mohammed Abo Moati for Bookstores Company",
+                "4192.SR": "السيف لمحلات التنمية والاستثمار",
+                "4193.SR": "نايس وان بيوتي للتسويق الرقمي",
+                "4191.SR": "عبدالله سعد محمد أبو معطي للمكتبات",
                 "4008.SR": "ساكو",
                 "4144.SR": "روم للتجارة",
-                "4265.SR": "Cherry Trading Company",
-                "4194.SR": "Marketing Home Group Company for Trading Company",
-                "4006.SR": "Saudi Marketing Company",
-                "3007.SR": "Zahrat Al Waha For Trading Company",
-                "4051.SR": "Baazeem Trading Company",
-                "4070.SR": "Tihama for Advertising, Public Relations and Marketing Company",
-                "1213.SR": "Naseej International Trading Company",
-                "4141.SR": "Al-Omran Industrial Trading Company",
+                "4265.SR": "شيري للتجارة",
+                "4194.SR": "مجموعة داماك المنزلية للتجارة",
+                "4006.SR": "المجموعة السعودية للتسويق",
+                "3007.SR": "زهرة الواحة للتجارة",
+                "4051.SR": "باعظيم التجارية",
+                "4070.SR": "تهامة للإعلان والعلاقات العامة",
+                "1213.SR": "نسيج الدولية التجارية",
+                "4141.SR": "العمران الصناعية التجارية",
             },
             "الإعلام": {
                 "4072.SR": "MBC",
@@ -264,20 +264,20 @@ SECTORS = {
             },
             "التعليم": {
                 "4291.SR": "التعليم الأهلي",
-                "6019.SR": "Almasar Alshamil Education Company JSC",
+                "6019.SR": "المسار الشامل التعليمية",
                 "4292.SR": "عطاء التعليمية",
-                "4290.SR": "Al Khaleej Training and Education Company",
+                "4290.SR": "الخليج للتدريب والتعليم",
             },
             "الفنادق والسياحة": {
                 "1810.SR": "سيرا القابضة",
-                "4170.SR": "Tourism Enterprise Company (Shams)",
+                "4170.SR": "شمس للمشاريع السياحية",
             },
             "الخدمات المالية": {
                 "4084.SR": "دراية المالية",
                 "1183.SR": "شركة SHL للتمويل",
                 "4081.SR": "نايفات للتمويل",
-                "1182.SR": "Amlak International Finance Company",
-                "4082.SR": "Morabaha Marina Financing Company",
+                "1182.SR": "أملاك الدولية للتمويل العقاري",
+                "4082.SR": "مرابحة مارينا للتمويل",
             },
             "الأسمنت": {
                 "3020.SR": "أسمنت اليمامة",
@@ -299,8 +299,8 @@ SECTORS = {
                 "6010.SR": "الوطنية للتنمية الزراعية",
                 "6070.SR": "الجوف للتنمية الزراعية",
                 "2287.SR": "العربية للاستثمار الزراعي والصناعي",
-                "2100.SR": "Wafrah for Industry and Development Company",
-                "6040.SR": "Tabuk Agricultural Development Company",
+                "2100.SR": "وفرة للصناعة والتنمية",
+                "6040.SR": "تبوك الزراعية للتنمية",
             },
             "الترفيه والرياضة": {
                 "1830.SR": "ليجاسي",
@@ -313,9 +313,9 @@ SECTORS = {
             },
             "الخدمات التجارية": {
                 "1831.SR": "مهرة للموارد البشرية",
-                "7204.SR": "Perfect Presentation for Commercial Services Company",
-                "1835.SR": "Tamkeen Human Resources Company",
-                "7205.SR": "Dar AlBalad for Business Solutions Company",
+                "7204.SR": "بريزنتيشن المثالية للخدمات التجارية",
+                "1835.SR": "تمكين للموارد البشرية",
+                "7205.SR": "دار البلد لحلول الأعمال",
             },
             "الورق والتغليف": {
                 "4270.SR": "السعودية للطباعة والتغليف",
@@ -851,6 +851,14 @@ SECTORS = {
                 "VLO": "Valero Energy",
                 "WMB": "Williams Companies",
             },
+            "الأسواق الدولية (ناسداك)": {
+                "ASML": "ASML Holding",
+                "PDD": "PDD Holdings (Temu/Pinduoduo)",
+                "MELI": "MercadoLibre",
+                "JD": "JD.com",
+                "BIDU": "Baidu",
+                "NTES": "NetEase",
+            },
         },
     },
 }
@@ -879,6 +887,18 @@ def compute_obv_slope(closes, volumes, lookback=10):
     slope = np.polyfit(x, recent.values, 1)[0]
     norm = slope / (volumes.tail(lookback).mean() + 1e-9)
     return float(np.clip(norm * 100, -100, 100))
+
+
+def compute_ma_trend(closes):
+    ma20 = float(closes.tail(20).mean())
+    ma50 = float(closes.tail(50).mean()) if len(closes) >= 50 else ma20
+    if ma20 > ma50 * 1.002:
+        trend = "صاعد"
+    elif ma20 < ma50 * 0.998:
+        trend = "هابط"
+    else:
+        trend = "عرضي"
+    return round(ma20, 2), round(ma50, 2), trend
 
 
 def market_price_status(market_key):
@@ -948,6 +968,8 @@ def analyze_ticker(symbol, name):
     target2 = round(price + atr * 3, 2)
     target3 = round(resistance, 2)
 
+    ma20, ma50, trend = compute_ma_trend(closes)
+
     row = {
         "code": symbol.replace(".SR", ""),
         "name": name,
@@ -965,6 +987,9 @@ def analyze_ticker(symbol, name):
         "target1": target1,
         "target2": target2,
         "target3": target3,
+        "ma20": ma20,
+        "ma50": ma50,
+        "trend": trend,
     }
 
     for key, value in row.items():
