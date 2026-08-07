@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-07T21:06:26.100571Z",
+  "updated_at": "2026-08-07T22:02:53.698702Z",
   "markets": {
     "sa": {
       "label": "السوق السعودي",
@@ -1418,7 +1418,7 @@
               "change_pct": 0.0,
               "rsi14": 50.0,
               "volume_ratio": 1.0,
-              "accumulation_score": 80.4,
+              "accumulation_score": 79.6,
               "classification": "تجميع نشط",
               "support": 18.74,
               "resistance": 18.74,
