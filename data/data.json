@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-11T21:11:05.617279Z",
+  "updated_at": "2026-08-11T22:09:47.888822Z",
   "markets": {
     "sa": {
       "label": "السوق السعودي",
@@ -851,7 +851,7 @@
         },
         {
           "name": "الصناعة",
-          "score": 85.3,
+          "score": 85.5,
           "stocks": [
             {
               "code": "1212",
@@ -1274,6 +1274,27 @@
               "trend": "صاعد"
             },
             {
+              "code": "2210",
+              "name": "نماء للكيماويات",
+              "price": 18.74,
+              "change_pct": 0.0,
+              "rsi14": 50.0,
+              "volume_ratio": 1.0,
+              "accumulation_score": 80.0,
+              "classification": "تجميع نشط",
+              "support": 18.74,
+              "resistance": 18.74,
+              "week52_low": 18.74,
+              "week52_high": 27.4,
+              "stop_loss": 18.74,
+              "target1": 18.74,
+              "target2": 18.74,
+              "target3": 18.74,
+              "ma20": 18.74,
+              "ma50": 18.74,
+              "trend": "عرضي"
+            },
+            {
               "code": "2060",
               "name": "التصنيع",
               "price": 8.62,
@@ -1440,27 +1461,6 @@
               "ma20": 47.9,
               "ma50": 50.97,
               "trend": "هابط"
-            },
-            {
-              "code": "2210",
-              "name": "نماء للكيماويات",
-              "price": 18.74,
-              "change_pct": 0.0,
-              "rsi14": 50.0,
-              "volume_ratio": 1.0,
-              "accumulation_score": 75.1,
-              "classification": "تجميع نشط",
-              "support": 18.74,
-              "resistance": 18.74,
-              "week52_low": 18.74,
-              "week52_high": 27.4,
-              "stop_loss": 18.74,
-              "target1": 18.74,
-              "target2": 18.74,
-              "target3": 18.74,
-              "ma20": 18.74,
-              "ma50": 18.74,
-              "trend": "عرضي"
             },
             {
               "code": "2040",
