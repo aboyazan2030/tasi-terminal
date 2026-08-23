@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-23T13:42:03.748842Z",
+  "updated_at": "2026-08-23T14:02:59.026167Z",
   "markets": {
     "sa": {
       "label": "السوق السعودي",
@@ -7078,7 +7078,7 @@
               "classification": "تجميع نشط",
               "support": 933.51,
               "resistance": 974.03,
-              "week52_low": 846.27,
+              "week52_low": 846.26,
               "week52_high": 1092.58,
               "stop_loss": 925.66,
               "target1": 971.3,
