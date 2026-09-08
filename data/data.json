@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-07T21:37:50.839500Z",
+  "updated_at": "2026-09-08T04:37:13.722556Z",
   "markets": {
     "sa": {
       "label": "السوق السعودي",
@@ -1664,7 +1664,7 @@
         },
         {
           "name": "الزراعة",
-          "score": 67.0,
+          "score": 67.1,
           "stocks": [
             {
               "code": "2100",
@@ -1690,22 +1690,22 @@
             {
               "code": "6040",
               "name": "تبوك الزراعية للتنمية",
-              "price": 8.97,
-              "change_pct": 0.0,
-              "rsi14": 49.1,
+              "price": 9.02,
+              "change_pct": 0.56,
+              "rsi14": 50.6,
               "volume_ratio": 0.32,
-              "accumulation_score": 63.2,
+              "accumulation_score": 63.8,
               "classification": "محايد",
               "support": 8.3,
               "resistance": 9.41,
               "week52_low": 5.8,
               "week52_high": 10.44,
               "stop_loss": 8.13,
-              "target1": 9.47,
-              "target2": 9.98,
+              "target1": 9.52,
+              "target2": 10.03,
               "target3": 9.41,
               "ma20": 9.07,
-              "ma50": 8.42,
+              "ma50": 8.43,
               "trend": "صاعد"
             },
             {
@@ -12353,7 +12353,7 @@
               "price": 460.72,
               "change_pct": 0.12,
               "rsi14": 27.6,
-              "volume_ratio": 1.19,
+              "volume_ratio": 1.2,
               "accumulation_score": 69.5,
               "classification": "تجميع نشط",
               "support": 443.31,
