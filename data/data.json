@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-27T12:53:52.504672Z",
+  "updated_at": "2026-09-27T15:33:46.187689Z",
   "markets": {
     "sa": {
       "label": "السوق السعودي",
@@ -83,7 +83,7 @@
         },
         {
           "name": "الصناعة",
-          "score": 69.8,
+          "score": 69.6,
           "stocks": [
             {
               "code": "1212",
@@ -212,27 +212,6 @@
               "trend": "هابط"
             },
             {
-              "code": "2210",
-              "name": "نماء للكيماويات",
-              "price": 18.74,
-              "change_pct": 0.0,
-              "rsi14": 50.0,
-              "volume_ratio": 1.0,
-              "accumulation_score": 84.5,
-              "classification": "تجميع نشط",
-              "support": 18.74,
-              "resistance": 18.74,
-              "week52_low": 18.74,
-              "week52_high": 27.3,
-              "stop_loss": 18.74,
-              "target1": 18.74,
-              "target2": 18.74,
-              "target3": 18.74,
-              "ma20": 18.74,
-              "ma50": 18.74,
-              "trend": "عرضي"
-            },
-            {
               "code": "2220",
               "name": "الوطنية لتصنيع وتشكيل المعادن",
               "price": 10.68,
@@ -315,6 +294,27 @@
               "ma20": 25.09,
               "ma50": 24.59,
               "trend": "صاعد"
+            },
+            {
+              "code": "2210",
+              "name": "نماء للكيماويات",
+              "price": 18.74,
+              "change_pct": 0.0,
+              "rsi14": 50.0,
+              "volume_ratio": 1.0,
+              "accumulation_score": 79.0,
+              "classification": "تجميع نشط",
+              "support": 18.74,
+              "resistance": 18.74,
+              "week52_low": 18.74,
+              "week52_high": 27.3,
+              "stop_loss": 18.74,
+              "target1": 18.74,
+              "target2": 18.74,
+              "target3": 18.74,
+              "ma20": 18.74,
+              "ma50": 18.74,
+              "trend": "عرضي"
             },
             {
               "code": "1210",
@@ -3536,7 +3536,7 @@
         },
         {
           "name": "التأمين",
-          "score": 60.9,
+          "score": 61.1,
           "stocks": [
             {
               "code": "8070",
@@ -3812,6 +3812,27 @@
               "trend": "صاعد"
             },
             {
+              "code": "8190",
+              "name": "الاتحاد التعاوني للتأمين (المتحدة)",
+              "price": 3.38,
+              "change_pct": 0.0,
+              "rsi14": 21.1,
+              "volume_ratio": 0.0,
+              "accumulation_score": 58.9,
+              "classification": "تشبع بيعي",
+              "support": 3.35,
+              "resistance": 3.54,
+              "week52_low": 2.82,
+              "week52_high": 5.5,
+              "stop_loss": 3.34,
+              "target1": 3.42,
+              "target2": 3.46,
+              "target3": 3.54,
+              "ma20": 3.42,
+              "ma50": 3.35,
+              "trend": "صاعد"
+            },
+            {
               "code": "8260",
               "name": "الخليج العام للتأمين التعاوني",
               "price": 3.68,
@@ -3915,27 +3936,6 @@
               "ma20": 11.08,
               "ma50": 11.55,
               "trend": "هابط"
-            },
-            {
-              "code": "8190",
-              "name": "الاتحاد التعاوني للتأمين (المتحدة)",
-              "price": 3.38,
-              "change_pct": 0.0,
-              "rsi14": 21.1,
-              "volume_ratio": 0.0,
-              "accumulation_score": 52.4,
-              "classification": "تشبع بيعي",
-              "support": 3.35,
-              "resistance": 3.54,
-              "week52_low": 2.82,
-              "week52_high": 5.5,
-              "stop_loss": 3.34,
-              "target1": 3.42,
-              "target2": 3.46,
-              "target3": 3.54,
-              "ma20": 3.42,
-              "ma50": 3.35,
-              "trend": "صاعد"
             },
             {
               "code": "8050",
@@ -12043,7 +12043,7 @@
               "classification": "تجميع نشط",
               "support": 893.74,
               "resistance": 945.47,
-              "week52_low": 846.27,
+              "week52_low": 846.26,
               "week52_high": 1092.58,
               "stop_loss": 887.22,
               "target1": 942.32,
