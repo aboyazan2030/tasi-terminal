@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-04T13:06:25.038603Z",
+  "updated_at": "2026-10-04T15:42:23.825165Z",
   "markets": {
     "sa": {
       "label": "السوق السعودي",
@@ -4229,7 +4229,7 @@
         },
         {
           "name": "الصناعة",
-          "score": 54.9,
+          "score": 55.0,
           "stocks": [
             {
               "code": "2360",
@@ -4274,6 +4274,27 @@
               "trend": "هابط"
             },
             {
+              "code": "2210",
+              "name": "نماء للكيماويات",
+              "price": 18.74,
+              "change_pct": 0.0,
+              "rsi14": 50.0,
+              "volume_ratio": 1.0,
+              "accumulation_score": 82.2,
+              "classification": "تجميع نشط",
+              "support": 18.74,
+              "resistance": 18.74,
+              "week52_low": 18.74,
+              "week52_high": 27.3,
+              "stop_loss": 18.74,
+              "target1": 18.74,
+              "target2": 18.74,
+              "target3": 18.74,
+              "ma20": 18.74,
+              "ma50": 18.74,
+              "trend": "عرضي"
+            },
+            {
               "code": "1301",
               "name": "المصانع المتحدة للأسلاك",
               "price": 16.62,
@@ -4314,27 +4335,6 @@
               "ma20": 4.19,
               "ma50": 4.5,
               "trend": "هابط"
-            },
-            {
-              "code": "2210",
-              "name": "نماء للكيماويات",
-              "price": 18.74,
-              "change_pct": 0.0,
-              "rsi14": 50.0,
-              "volume_ratio": 1.0,
-              "accumulation_score": 79.4,
-              "classification": "تجميع نشط",
-              "support": 18.74,
-              "resistance": 18.74,
-              "week52_low": 18.74,
-              "week52_high": 27.3,
-              "stop_loss": 18.74,
-              "target1": 18.74,
-              "target2": 18.74,
-              "target3": 18.74,
-              "ma20": 18.74,
-              "ma50": 18.74,
-              "trend": "عرضي"
             },
             {
               "code": "4148",
@@ -10528,7 +10528,7 @@
               "classification": "تشبع بيعي",
               "support": 381.67,
               "resistance": 424.24,
-              "week52_low": 276.69,
+              "week52_low": 276.68,
               "week52_high": 424.94,
               "stop_loss": 377.22,
               "target1": 399.78,
